@@ -1,6 +1,6 @@
 #!/bin/bash
 
-publish() {
+push_to_preprod() {
   USERNAME=<EDITHERE>
   HOST=<EDITHERE>
   DIR=/<ROOT>/<OF>/YOUR>/<SERVER>/<FOLDER>
@@ -18,6 +18,26 @@ publish() {
   rsync -vcae "ssh -p 22" --delete .output/server/ $USERNAME@$HOST:$DIR/server
 
   echo "publish to preprod server ended - OK"
+}
+
+push_to_prod() {
+  USERNAME=<EDITHERE>
+  HOST=<EDITHERE>
+  DIR=/<ROOT>/<OF>/YOUR>/<SERVER>/<FOLDER>
+  
+  echo "transfert build folder to prod server"
+  
+  # must use a proxy index.cjs for pegasus phusion passenger to work with esm
+  cp server/index.cjs .output/server/index.cjs
+  
+  
+  
+  #rsync OPTION SourceDirectory_or_filePath user@serverIP_or_name:Target
+
+  rsync -vcae "ssh -p 22" --delete .output/public/ $USERNAME@$HOST:$DIR/public
+  rsync -vcae "ssh -p 22" --delete .output/server/ $USERNAME@$HOST:$DIR/server
+
+  echo "publish to prod server ended - OK"
 }
 
 $*
