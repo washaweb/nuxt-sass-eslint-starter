@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  font-family: 'Work Sans', Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  h2, h3, h4, h5, h6 {
+    font-weight: normal;
+  }
+  
+  & > div {
+    width: 90%;
+    max-width: 760px;
+    margin: 20px auto;
+    text-align: center;
+  }
+}
